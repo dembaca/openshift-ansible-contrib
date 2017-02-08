@@ -50,6 +50,8 @@ import sys
               show_default=True)
 @click.option('--public-subnet-id3', help='Specify a Public subnet within the existing VPC',
               show_default=True)
+@click.option('--two-zones', default='no', help='Specify "yes" if only to availabilty zones are available',
+              show_default=True)
 
 ### DNS options
 @click.option('--public-hosted-zone', help='hosted zone for accessing the environment')
@@ -98,6 +100,7 @@ def launch_refarch_env(region=None,
                     public_subnet_id1=None,
                     public_subnet_id2=None,
                     public_subnet_id3=None,
+                    two_zones=None,
                     byo_bastion=None,
                     bastion_sg=None,
                     public_hosted_zone=None,
@@ -200,6 +203,7 @@ def launch_refarch_env(region=None,
   click.echo('\tpublic_subnet_id1: %s' % public_subnet_id1)
   click.echo('\tpublic_subnet_id2: %s' % public_subnet_id2)
   click.echo('\tpublic_subnet_id3: %s' % public_subnet_id3)
+  click.echo('\ttwo_zones: %s' % two_zones)
   click.echo('\tbyo_bastion: %s' % byo_bastion)
   click.echo('\tbastion_sg: %s' % bastion_sg)
   click.echo('\tconsole port: %s' % console_port)
@@ -256,6 +260,7 @@ def launch_refarch_env(region=None,
     public_subnet_id2=%s \
     public_subnet_id3=%s \
     byo_bastion=%s \
+		two_zones=%s \
     bastion_sg=%s \
     master_instance_type=%s \
     node_instance_type=%s \
@@ -288,6 +293,7 @@ def launch_refarch_env(region=None,
                     public_subnet_id2,
                     public_subnet_id3,
                     byo_bastion,
+										two_zones,
                     bastion_sg,
                     master_instance_type,
                     node_instance_type,
