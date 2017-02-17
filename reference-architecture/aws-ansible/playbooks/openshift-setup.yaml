@@ -54,3 +54,6 @@
     openshift_hosted_registry_pullthrough: true
     openshift_hosted_registry_acceptschema2: true
     openshift_hosted_registry_enforcequota: true
+    openshift_hosted_metrics_deploy: true
+    openshift_hosted_metrics_deployer_prefix: openshift/origin-
+    openshift_hosted_metrics_deployer_version: v1.3.1
