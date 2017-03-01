@@ -14,8 +14,19 @@
       state: latest
     with_items:
     - NetworkManager
+    - origin-excluder
+    - origin-docker-excluder
+    when: openshift.common.deployment_type == 'origin'
+
+  - name: Install the required rpms
+    package:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+    - NetworkManager
     - atomic-openshift-excluder
     - atomic-openshift-docker-excluder
+    when: not openshift.common.deployment_type == 'origin'
 
   - name: Start NetworkManager and network
     service:

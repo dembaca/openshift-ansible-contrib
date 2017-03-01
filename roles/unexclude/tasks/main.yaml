@@ -4,9 +4,17 @@
     role: common
 
 - block:
+    - name: Unexclude origin packages
+      command: origin-excluder unexclude
+
+    - name: Unexclude docker package
+      command: origin-docker-excluder unexclude
+  when: not openshift.common.is_atomic | bool and openshift.common.deployment_type == 'origin'
+
+- block:
     - name: Unexclude atomic-openshift packages
       command: atomic-openshift-excluder unexclude
 
     - name: Unexclude docker package
       command: atomic-openshift-docker-excluder unexclude
-  when: not openshift.common.is_atomic | bool
+  when: not openshift.common.is_atomic | bool and not openshift.common.deployment_type == 'origin'
